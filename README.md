@@ -25,7 +25,7 @@ Add `eslint-mocha-no-only` to the plugins section of your `.eslintrc` configurat
 ```json
 {
     "plugins": [
-        "eslint-mocha-no-only"
+        "mocha-no-only"
     ]
 }
 ```
@@ -36,7 +36,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "eslint-mocha-only/mocha-no-only": ["error"]
+        "mocha-no-only/mocha-no-only": ["error"]
     }
 }
 ```
