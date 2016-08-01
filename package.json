@@ -1,7 +1,11 @@
 {
   "name": "eslint-plugin-mocha-no-only",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Warns when a Mocha JavaScript test framework keyword 'only' is used",
+  "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/tidge789/eslint-mocha-no-only.git"
+  },
   "keywords": [
     "eslint",
     "eslintplugin",
