@@ -1,6 +1,11 @@
 # eslint-mocha-no-only
 
-Warns when a Mocha JavaScript test framework keyword 'only' is used.
+This package contains en ESLint rule which throws an error (or warning) when the `only()` method is called on `describe`, `context` and `it` Mocha test keywords.
+
+## Why do I need this?
+`only()` is a useful mocha feature that lets the test runner run one specific part of a test. Often, developers may end up forgetting removing the `only()` method before commiting and pushing their code. This results in the CI tool running only one specific test suite which may end up in a false-positive build.
+
+By having ESLint throw an error in such cases, you can rest assured your CI tool runs all your test suites.
 
 ## Installation
 
@@ -20,7 +25,7 @@ $ npm install eslint-plugin-mocha-no-only --save-dev
 
 ## Usage
 
-Add `eslint-mocha-no-only` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `eslint-plugin-mocha-no-only` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -39,4 +44,35 @@ Then configure the rules you want to use under the rules section.
         "mocha-no-only/mocha-no-only": ["error"]
     }
 }
+```
+**Note:** You may want to have a different `.eslintrc` file in your tests directory and place this plugin and rule in it. This would make sure ESLint doesn't errors on other JavaScript object named `describe.only()`, for example. There's also no need to have ESLint watch for this rule in files where there are no mocha tests.
+
+## Examples
+
+### Failing
+```
+  describe("foobar", function() {
+    var foo;
+    beforeEach(function() {
+      foo = new Foo();
+    });
+
+    it.only("should do things", function() {
+      expect(foo).to.do.things;
+    });
+  });
+```
+
+### Passing
+```
+  describe("foobar", function() {
+    var foo;
+    beforeEach(function() {
+      foo = new Foo();
+    });
+
+    it("should do things", function() {
+      expect(foo).to.do.things;
+    });
+  });
 ```
