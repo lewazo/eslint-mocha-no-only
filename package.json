@@ -4,7 +4,7 @@
   "description": "Warns when a Mocha JavaScript test framework keyword 'only' is used",
   "repository" : {
       "type" : "git",
-      "url" : "https://github.com/tidge789/eslint-mocha-no-only.git"
+      "url" : "https://github.com/lewazo/eslint-mocha-no-only.git"
   },
   "keywords": [
     "eslint",
