@@ -3,7 +3,7 @@
 This package contains en ESLint rule which throws an error (or warning) when the `only()` method is called on `describe`, `context`, `it`, `specify`, `suite` and `test` Mocha test keywords.
 
 ## Why do I need this?
-`only()` is a useful Mocha feature that lets the test runner run one specific part of a test suite. Often, developers may end up forgetting removing the `only()` method before commiting and pushing their code. This results in the CI tool running only one specific test in the suite which may end up in a false-positive build.
+`only()` is a useful Mocha feature that lets the test runner run one specific part of a test suite. Often, developers may end up forgetting to remove the `only()` method before commiting and pushing their code. This results in the CI tool running only one specific test in the suite which may end up in a false-positive build.
 
 By having ESLint throw an error in such cases, you can rest assured your CI tool runs all your test suites.
 
@@ -45,7 +45,7 @@ Then configure the rules you want to use under the rules section.
     }
 }
 ```
-**Note:** You may want to have a different `.eslintrc` file in your tests directory and place this plugin and rule in it. This would make sure ESLint doesn't errors on other JavaScript object named `describe.only()`, for example. There's also no need to have ESLint watch for this rule in files where there are no mocha tests.
+**Note:** You may want to have a different `.eslintrc` file in your tests directory and place this plugin and rule in it. This would make sure ESLint doesn't throw errors on other JavaScript object named `describe.only()`, for example. There's also no need to have ESLint watch for this rule in files where there are no mocha tests.
 
 ## Examples
 
