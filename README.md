@@ -1,6 +1,6 @@
 # eslint-mocha-no-only
 
-This package contains en ESLint rule which throws an error (or warning) when the `only()` method is called on `describe`, `context`, `it`, `specify`, `suite` and `test` Mocha test keywords.
+This package contains an ESLint rule which throws an error (or warning) when the `only()` method is called on `describe`, `context`, `it`, `specify`, `suite` and `test` Mocha test keywords.
 
 ## Why do I need this?
 `only()` is a useful Mocha feature that lets the test runner run one specific part of a test suite. Often, developers may end up forgetting to remove the `only()` method before commiting and pushing their code. This results in the CI tool running only one specific test in the suite which may end up in a false-positive build.
