@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-mocha-no-only",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "Warns when a .only function call is chained to a Mocha JavaScript test",
   "repository" : {
       "type" : "git",
