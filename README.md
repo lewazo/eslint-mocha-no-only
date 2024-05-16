@@ -25,54 +25,75 @@ $ npm install eslint-plugin-mocha-no-only --save-dev
 
 ## Usage
 
-Add `eslint-plugin-mocha-no-only` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Enable the `eslint-plugin-mocha-no-only` plugin and rules in your `eslint.config.js` file.
 
-```json
-{
-    "plugins": [
-        "mocha-no-only"
-    ]
-}
+```js
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import mochaNoOnly from "eslint-plugin-mocha-no-only"
+
+
+export default [
+  {
+    languageOptions: { globals: globals.browser },
+    plugins: { mochaNoOnly },
+    rules: { "mochaNoOnly/mocha-no-only": ["error"] }
+  },
+  pluginJs.configs.recommended,
+];
+
 ```
 
+**Note:** You may want to only enable this rule for files in your tests suite. This can be done by adding an additional config object with a `files` key.
 
-Then configure the rules you want to use under the rules section.
+```js
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import mochaNoOnly from "eslint-plugin-mocha-no-only"
 
-```json
-{
-    "rules": {
-        "mocha-no-only/mocha-no-only": ["error"]
-    }
-}
+
+export default [
+  {
+    languageOptions: { globals: globals.browser },
+    plugins: { ... },
+    rules: { ... }
+  },
+  {
+    files: ["test/**.js"],
+    plugins: { mochaNoOnly },
+    rules: { "mochaNoOnly/mocha-no-only": ["error"] }
+  },
+  pluginJs.configs.recommended,
+];
+
 ```
-**Note:** You may want to have a different `.eslintrc` file in your tests directory and place this plugin and rule in it. This would make sure ESLint doesn't throw errors on other JavaScript object named `describe.only()`, for example. There's also no need to have ESLint watch for this rule in files where there are no mocha tests.
 
 ## Examples
 
 ### Failing
-```
-  describe("foobar", function() {
-    var foo;
-    beforeEach(function() {
-      foo = new Foo();
-    });
-
-    it.only("should do things", function() {
-      expect(foo).to.do.things;
-    });
+```js
+describe("foobar", function() {
+  var foo;
+  beforeEach(function() {
+    foo = new Foo();
   });
+
+  it.only("should do things", function() {
+    expect(foo).to.do.things;
+  });
+});
 ```
 
 ### Passing
-```
-  describe("foobar", function() {
-    var foo;
-    beforeEach(function() {
-      foo = new Foo();
-    });
-
-    it("should do things", function() {
-      expect(foo).to.do.things;
-    });
+```js
+describe("foobar", function() {
+  var foo;
+  beforeEach(function() {
+    foo = new Foo();
   });
+
+  it("should do things", function() {
+    expect(foo).to.do.things;
+  });
+});
 ```
